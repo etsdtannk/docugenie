@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Docugenie - Your Chat Assistant" />
-    <title>ETS Sample Web Chat Test</title>
+    <title>ETS Web Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
       let webChatInstance = null;
@@ -245,6 +246,7 @@
         Roboto, sans-serif;
     }
     body {
+      padding-top: 80px;
       min-height: 100vh;
       background-color: #f3f4f6;
     }
@@ -264,7 +266,7 @@
       transform-origin: bottom right;
       transform: scale(0.95);
       transition: all var(--transition-speed) ease-in-out;
-      z-index: 999;
+      z-index: 2000;
     }
     #chatbot-popup.visible {
       display: block;
@@ -355,23 +357,36 @@
       margin: 4px 0 !important;
       padding-left: 4px !important;
     }
+
+    .navbar-brand img {
+    /* Fixed height is better for navbars than percentages */
+    height: 40px; 
+    width: auto;
+}
+
     #open-chat {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--primary-gradient);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      transition: all var(--transition-speed) ease-in-out;
-      z-index: 998;
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    min-width: 64px; 
+    width: auto; 
+    height: 64px;
+    padding: 0 18px; 
+    border-radius: 50px;
+    background: var(--primary-gradient);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out; 
+    
+    z-index: 998;
+    overflow: hidden; 
+    white-space: nowrap;
     }
+
     #open-chat.hidden {
       opacity: 0;
       transform: scale(0.95) translateY(10px);
@@ -459,6 +474,35 @@
     .content-box.featured p {
       color: #000000;
     }
+
+   .custom-chat-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: none;
+    background-color: #007bff; 
+    color: white;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+    }
+
+    .btn-text {
+        display: inline-block;
+        max-width: 0;       
+        opacity: 0;     
+        margin-left: 0;
+        transition: all 0.4s ease-in-out;
+        vertical-align: middle;
+    }
+
+    .custom-chat-btn:hover .btn-text {
+        max-width: 200px;   
+        opacity: 1;
+        margin-left: 10px;
+    }
+
     @media (max-width: 768px) {
       .content-grid {
         grid-template-columns: 1fr;
@@ -483,6 +527,13 @@
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-light bg-light fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="https://www.ets.org/">      
+      <img src="images/ets.jpg" alt="ets" width="10%" height="10%">
+    </a>
+    </div> 
+  </nav>
   <div class="main-content">
     <h1>Header</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
@@ -520,7 +571,7 @@
             d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
           ></path>
         </svg>
-        <span>Docugenie</span>
+        <span>DocuGenie</span>
       </div>
       <div class="header-buttons">
         <button
@@ -571,12 +622,15 @@
     </div>
     <div id="webchat" role="main"></div>
   </div>
-  <button
+
+<button
     id="open-chat"
     onclick="showChat()"
-    aria-label="Open Chat Assistant"
+    class="btn btn-primary d-flex align-items-center custom-chat-btn"
+    aria-label="Open DocuGenie"
+    class="btn custom-chat-btn"
   >
-   <svg
+    <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -585,10 +639,11 @@
       stroke-linejoin="round"
       aria-hidden="true"
     >
-      <path
+      <path 
       d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
       ></path>
     </svg>
-  </button>
+    <span class="btn-text">Chat With DocuGenie</span>
+</button>
 </body>
 </html>
